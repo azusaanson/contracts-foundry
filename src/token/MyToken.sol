@@ -10,11 +10,11 @@ contract MyToken is IMyToken, ERC20Votes {
     // ============ Constants ============
     string internal constant _NAME = 'MyToken';
     string internal constant _SYMBOL = 'MYTOKEN';
-    uint256 public constant INITIAL_SUPPLY = 1_000_000_000;
+    uint256 internal constant _INITIAL_SUPPLY = 1_000_000_000;
 
     // ============ Constructor ============
     constructor(address distributor) ERC20(_NAME, _SYMBOL) ERC20Permit(_NAME) {
-        super._mint(distributor, INITIAL_SUPPLY);
+        super._mint(distributor, _INITIAL_SUPPLY);
     }
 
     // ============ External Functions ============
