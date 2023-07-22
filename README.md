@@ -2,4 +2,4 @@
 
 vscode extension:
 
-- solidity by Juan Blanco v0.0.135
+- solidity by Juan Blanco

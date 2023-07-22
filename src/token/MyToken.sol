@@ -18,11 +18,9 @@ contract MyToken is IMyToken, ERC20Votes {
     }
 
     // ============ External Functions ============
-    function supportsInterface(bytes4 interfaceId)
-        external
-        pure
-        returns (bool)
-    {
+    function supportsInterface(
+        bytes4 interfaceId
+    ) external pure returns (bool) {
         return interfaceId == type(IERC20).interfaceId;
     }
 }
