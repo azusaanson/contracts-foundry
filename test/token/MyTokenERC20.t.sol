@@ -17,8 +17,8 @@ contract MyTokenERC20Test is Test, Helper {
     }
 
     function testBasicView() public {
-        assertEq(myToken.name(), 'MyToken');
-        assertEq(myToken.symbol(), 'MYTOKEN');
+        assertEq(myToken.name(), "MyToken");
+        assertEq(myToken.symbol(), "MYTOKEN");
         assertEq(myToken.decimals(), 18);
     }
 
@@ -41,7 +41,13 @@ contract MyTokenERC20Test is Test, Helper {
         vm.stopPrank();
     }
 
-    function testAllowance(uint256 amount, uint256 allowAmount, uint256 increaseAmount, uint256 decreaseAmount, uint256 toAmount) public {
+    function testAllowance(
+        uint256 amount,
+        uint256 allowAmount,
+        uint256 increaseAmount,
+        uint256 decreaseAmount,
+        uint256 toAmount
+    ) public {
         address owner = makeAddr("owner");
         address spender = makeAddr("spender");
         address to = makeAddr("to");

@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import { IMyToken } from "./IMyToken.sol";
-import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import { ERC20Votes, ERC20Permit } from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import {IMyToken} from "./IMyToken.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {ERC20Votes, ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract MyToken is IMyToken, ERC20Votes {
     // ============ Constants ============
-    string internal constant _NAME = 'MyToken';
-    string internal constant _SYMBOL = 'MYTOKEN';
+    string internal constant _NAME = "MyToken";
+    string internal constant _SYMBOL = "MYTOKEN";
     uint256 internal constant _INITIAL_SUPPLY = 1_000_000_000;
 
     // ============ Constructor ============
