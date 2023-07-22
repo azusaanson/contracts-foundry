@@ -12,14 +12,14 @@ contract MyTokenERC20Test is Test, Helper {
 
     function setUp() public {
         myToken = new MyToken(distributor);
-        assertEq(myToken.totalSupply(), INITIAL_SUPPLY);
-        assertEq(myToken.balanceOf(distributor), INITIAL_SUPPLY);
     }
 
-    function testBasicView() public {
+    function testBasic() public {
         assertEq(myToken.name(), "MyToken");
         assertEq(myToken.symbol(), "MYTOKEN");
         assertEq(myToken.decimals(), 18);
+        assertEq(myToken.totalSupply(), INITIAL_SUPPLY);
+        assertEq(myToken.balanceOf(distributor), INITIAL_SUPPLY);
     }
 
     function testTransfer(uint256 amount, uint256 amount2) public {

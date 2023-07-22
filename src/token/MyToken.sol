@@ -18,6 +18,15 @@ contract MyToken is IMyToken, ERC20Votes {
     }
 
     // ============ External Functions ============
+    function burn(uint256 amount) external {
+        super._burn(_msgSender(), amount);
+    }
+
+    function burnFrom(address account, uint256 amount) external {
+        super._spendAllowance(account, _msgSender(), amount);
+        super._burn(account, amount);
+    }
+
     function supportsInterface(
         bytes4 interfaceId
     ) external pure returns (bool) {
