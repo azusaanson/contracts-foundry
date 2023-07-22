@@ -5,7 +5,7 @@
   },
   "solidity.packageDefaultDependenciesContractsDirectory": "src",
   "solidity.packageDefaultDependenciesDirectory": "lib",
-  "solidity.formatter": "forge",
+  "solidity.formatter": "prettier",
   "solidity.defaultCompiler": "localFile",
   "solidity.remappings": ["@openzeppelin/=lib/openzeppelin-contracts/"],
   "solidity.remappingsUnix": ["@openzeppelin/=lib/openzeppelin-contracts/"],
