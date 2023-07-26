@@ -94,6 +94,8 @@ Governor:
 - version()
 - clock()
 - CLOCK_MODE()
+- votingDelay()
+- votingPeriod()
 
 Proposal:
 
