@@ -3,6 +3,7 @@
 - [Compile and Test](#compile-and-test/)
 - [Vscode Extension](#vscode-extension/)
 - [MyToken](#mytoken/)
+- [MyGovernor](#my-governor/)
 
 ## Compile and Test
 
@@ -24,9 +25,7 @@ forge test
 
 ## MyToken
 
-### External (or Public) Functions:
-
-#### view:
+### View
 
 ERC20:
 
@@ -61,7 +60,7 @@ Votes:
 - getPastVotes(address account, uint256 timepoint)
 - getPastTotalSupply(uint256 timepoint)
 
-#### post:
+### Post
 
 ERC20:
 
@@ -78,24 +77,134 @@ Burn:
 
 Permit:
 
-- permit(
-  address owner,
-  address spender,
-  uint256 value,
-  uint256 deadline,
-  uint8 v,
-  bytes32 r,
-  bytes32 s
-  )
+- permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
 
 Votes:
 
 - delegate(address delegatee)
-- delegateBySig(
-  address delegatee,
-  uint256 nonce,
-  uint256 expiry,
+- delegateBySig(address delegatee, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)
+
+## MyGovernor
+
+### View
+
+Governor:
+
+- name()
+- version()
+- clock()
+- CLOCK_MODE()
+
+Proposal:
+
+- hashProposal(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
+- state(uint256 proposalId)
+- proposalThreshold()
+- proposalSnapshot(uint256 proposalId)
+- proposalDeadline(uint256 proposalId)
+- proposalProposer(uint256 proposalId)
+
+GetVotesByAddress:
+
+- getVotes(address account, uint256 timepoint)
+- getVotesWithParams(
+  address account,
+  uint256 timepoint,
+  bytes memory params
+  )
+
+Counting:
+
+- COUNTING_MODE()
+- hasVoted(uint256 proposalId, address account)
+- proposalVotes(
+  uint256 proposalId
+  )
+
+Quorum:
+
+- quorumNumerator()
+- quorumNumerator(uint256 timepoint)
+- quorumDenominator()
+- quorum(uint256 timepoint)
+
+ERC165:
+
+- supportsInterface(bytes4 interfaceId)
+
+### Post
+
+Proposal:
+
+- propose(
+  address[] memory targets,
+  uint256[] memory values,
+  bytes[] memory calldatas,
+  string memory description
+  )
+- execute(
+  address[] memory targets,
+  uint256[] memory values,
+  bytes[] memory calldatas,
+  bytes32 descriptionHash
+  )
+- cancel(
+  address[] memory targets,
+  uint256[] memory values,
+  bytes[] memory calldatas,
+  bytes32 descriptionHash
+  )
+
+Vote:
+
+- castVote(uint256 proposalId, uint8 support)
+- castVoteWithReason(
+  uint256 proposalId,
+  uint8 support,
+  string calldata reason
+  )
+- castVoteWithReasonAndParams(
+  uint256 proposalId,
+  uint8 support,
+  string calldata reason,
+  bytes memory params
+  )
+- castVoteBySig(
+  uint256 proposalId,
+  uint8 support,
   uint8 v,
   bytes32 r,
   bytes32 s
   )
+- castVoteWithReasonAndParamsBySig(
+  uint256 proposalId,
+  uint8 support,
+  string calldata reason,
+  bytes memory params,
+  uint8 v,
+  bytes32 r,
+  bytes32 s
+  )
+
+ERC165:
+
+- onERC721Received(address, address, uint256, bytes memory)
+- onERC1155Received(
+  address,
+  address,
+  uint256,
+  uint256,
+  bytes memory
+  )
+- onERC1155BatchReceived(
+  address,
+  address,
+  uint256[] memory,
+  uint256[] memory,
+  bytes memory
+  )
+
+OnlyGovernance:
+
+- relay(address target, uint256 value, bytes calldata data)
+- updateQuorumNumerator(uint256 newQuorumNumerator)
