@@ -36,8 +36,6 @@ ERC20:
 - balanceOf(address account)
 - allowance(address owner, address spender)
 
-- initialSupply() = 1_000_000_000
-
 ERC165:
 
 - supportsInterface(bytes4 interfaceId)
@@ -61,6 +59,10 @@ Votes:
 - getVotes(address account)
 - getPastVotes(address account, uint256 timepoint)
 - getPastTotalSupply(uint256 timepoint)
+
+Other:
+
+- initialSupply() = 1_000_000_000
 
 ### Post
 
