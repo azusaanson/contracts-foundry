@@ -19,14 +19,14 @@ ERC165:
 
 - supportsInterface(bytes4 interfaceId)
 
+EIP712:
+
+- eip712Domain()
+
 Permit:
 
 - nonces(address owner)
 - DOMAIN_SEPARATOR()
-
-EIP712:
-
-- eip712Domain()
 
 Votes:
 
@@ -41,11 +41,6 @@ Votes:
 
 #### post:
 
-MyToken:
-
-- burn(uint256 amount)
-- burnFrom(address account, uint256 amount)
-
 ERC20:
 
 - transfer(address to, uint256 amount)
@@ -54,7 +49,12 @@ ERC20:
 - increaseAllowance(address spender, uint256 addedValue)
 - decreaseAllowance(address spender, uint256 subtractedValue)
 
-EIP712:
+Burn:
+
+- burn(uint256 amount)
+- burnFrom(address account, uint256 amount)
+
+Permit:
 
 - permit(
   address owner,
