@@ -1,6 +1,28 @@
 # contracts-foundry
 
-## MyToken(ERC20):
+- [Compile and Test](#compile-and-test/)
+- [Vscode Extension](#vscode-extension/)
+- [MyToken](#mytoken/)
+
+## Compile and Test
+
+- Compile
+
+```
+forge compile
+```
+
+- Test
+
+```
+forge test
+```
+
+## Vscode Extension
+
+- [solidity by Juan Blanco](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
+
+## MyToken
 
 ### External (or Public) Functions:
 
@@ -77,7 +99,3 @@ Votes:
   bytes32 r,
   bytes32 s
   )
-
-## vscode extension:
-
-- solidity by Juan Blanco
