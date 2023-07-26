@@ -2,9 +2,10 @@
 pragma solidity ^0.8.19;
 
 import {IMyToken} from "./IMyToken.sol";
-import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {ERC20Votes, ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import {IVotes} from "../../lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol";
+import {IERC20} from "../../lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
+import {ERC20} from "../../lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
+import {ERC20Votes, ERC20Permit} from "../../lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract MyToken is IMyToken, ERC20Votes {
     // ============ Constants ============
@@ -30,6 +31,8 @@ contract MyToken is IMyToken, ERC20Votes {
     function supportsInterface(
         bytes4 interfaceId
     ) external pure returns (bool) {
-        return interfaceId == type(IERC20).interfaceId;
+        return
+            interfaceId == type(IERC20).interfaceId ||
+            interfaceId == type(IVotes).interfaceId;
     }
 }
