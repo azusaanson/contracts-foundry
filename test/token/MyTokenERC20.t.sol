@@ -27,14 +27,14 @@ contract MyTokenERC20Test is Test, Helper {
         address to2 = makeAddr("to2");
 
         vm.startPrank(distributor);
-        amount = zeroMod(amount, INITIAL_SUPPLY);
+        amount = _zeroMod(amount, INITIAL_SUPPLY);
         myToken.transfer(to, amount);
         assertEq(myToken.balanceOf(to), amount);
         assertEq(myToken.balanceOf(distributor), INITIAL_SUPPLY - amount);
         vm.stopPrank();
 
         vm.startPrank(to);
-        amount2 = zeroMod(amount2, amount);
+        amount2 = _zeroMod(amount2, amount);
         myToken.transfer(to2, amount2);
         assertEq(myToken.balanceOf(to2), amount2);
         assertEq(myToken.balanceOf(to), amount - amount2);
@@ -53,28 +53,28 @@ contract MyTokenERC20Test is Test, Helper {
         address to = makeAddr("to");
 
         vm.startPrank(distributor);
-        amount = zeroMod(amount, INITIAL_SUPPLY);
+        amount = _zeroMod(amount, INITIAL_SUPPLY);
         myToken.transfer(owner, amount);
         vm.stopPrank();
 
         vm.startPrank(owner);
-        allowAmount = zeroMod(allowAmount, amount);
+        allowAmount = _zeroMod(allowAmount, amount);
         myToken.approve(spender, allowAmount);
         assertEq(myToken.allowance(owner, spender), allowAmount);
 
-        increaseAmount = zeroMod(increaseAmount, amount - allowAmount);
+        increaseAmount = _zeroMod(increaseAmount, amount - allowAmount);
         myToken.increaseAllowance(spender, increaseAmount);
         allowAmount = allowAmount + increaseAmount;
         assertEq(myToken.allowance(owner, spender), allowAmount);
 
-        decreaseAmount = zeroMod(decreaseAmount, allowAmount);
+        decreaseAmount = _zeroMod(decreaseAmount, allowAmount);
         myToken.decreaseAllowance(spender, decreaseAmount);
         allowAmount = allowAmount - decreaseAmount;
         assertEq(myToken.allowance(owner, spender), allowAmount);
         vm.stopPrank();
 
         vm.startPrank(spender);
-        toAmount = zeroMod(toAmount, allowAmount);
+        toAmount = _zeroMod(toAmount, allowAmount);
         myToken.transferFrom(owner, to, toAmount);
         assertEq(myToken.balanceOf(to), toAmount);
         assertEq(myToken.balanceOf(owner), amount - toAmount);
