@@ -16,7 +16,7 @@ contract MyTokenERC20Test is Test, Helper {
 
     function testBasic() public {
         assertEq(myToken.name(), "MyToken");
-        assertEq(myToken.symbol(), "MYTOKEN");
+        assertEq(myToken.symbol(), "MTK");
         assertEq(myToken.decimals(), 18);
         assertEq(myToken.totalSupply(), INITIAL_SUPPLY);
         assertEq(myToken.balanceOf(distributor), INITIAL_SUPPLY);

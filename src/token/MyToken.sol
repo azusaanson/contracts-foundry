@@ -10,7 +10,7 @@ import {ERC20Votes, ERC20Permit} from "../../lib/openzeppelin-contracts/contract
 contract MyToken is IMyToken, ERC20Votes {
     // ============ Constants ============
     string internal constant _NAME = "MyToken";
-    string internal constant _SYMBOL = "MYTOKEN";
+    string internal constant _SYMBOL = "MTK";
     uint256 internal constant _INITIAL_SUPPLY = 1_000_000_000;
 
     // ============ Constructor ============
