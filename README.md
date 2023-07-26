@@ -29,12 +29,14 @@ forge test
 
 ERC20:
 
-- name()
-- symbol()
-- decimals()
+- name() = MyToken
+- symbol() = MYTOKEN
+- decimals() = 18
 - totalSupply()
 - balanceOf(address account)
 - allowance(address owner, address spender)
+
+- initialSupply() = 1_000_000_000
 
 ERC165:
 
@@ -90,18 +92,18 @@ Votes:
 
 Governor:
 
-- name()
-- version()
+- name() = MyGovernor
+- version() = 1
 - clock()
 - CLOCK_MODE()
-- votingDelay()
-- votingPeriod()
+- votingDelay() = 7200(1 day)
+- votingPeriod() = 50400(1 week)
 
 Proposal:
 
 - hashProposal(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
 - state(uint256 proposalId)
-- proposalThreshold()
+- proposalThreshold() = 0
 - proposalSnapshot(uint256 proposalId)
 - proposalDeadline(uint256 proposalId)
 - proposalProposer(uint256 proposalId)
@@ -109,19 +111,13 @@ Proposal:
 GetVotesByAddress:
 
 - getVotes(address account, uint256 timepoint)
-- getVotesWithParams(
-  address account,
-  uint256 timepoint,
-  bytes memory params
-  )
+- getVotesWithParams(address account, uint256 timepoint, bytes memory params)
 
 Counting:
 
 - COUNTING_MODE()
 - hasVoted(uint256 proposalId, address account)
-- proposalVotes(
-  uint256 proposalId
-  )
+- proposalVotes(uint256 proposalId)
 
 Quorum:
 
@@ -138,73 +134,23 @@ ERC165:
 
 Proposal:
 
-- propose(
-  address[] memory targets,
-  uint256[] memory values,
-  bytes[] memory calldatas,
-  string memory description
-  )
-- execute(
-  address[] memory targets,
-  uint256[] memory values,
-  bytes[] memory calldatas,
-  bytes32 descriptionHash
-  )
-- cancel(
-  address[] memory targets,
-  uint256[] memory values,
-  bytes[] memory calldatas,
-  bytes32 descriptionHash
-  )
+- propose(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, string memory description)
+- execute(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
+- cancel(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
 
 Vote:
 
 - castVote(uint256 proposalId, uint8 support)
-- castVoteWithReason(
-  uint256 proposalId,
-  uint8 support,
-  string calldata reason
-  )
-- castVoteWithReasonAndParams(
-  uint256 proposalId,
-  uint8 support,
-  string calldata reason,
-  bytes memory params
-  )
-- castVoteBySig(
-  uint256 proposalId,
-  uint8 support,
-  uint8 v,
-  bytes32 r,
-  bytes32 s
-  )
-- castVoteWithReasonAndParamsBySig(
-  uint256 proposalId,
-  uint8 support,
-  string calldata reason,
-  bytes memory params,
-  uint8 v,
-  bytes32 r,
-  bytes32 s
-  )
+- castVoteWithReason(uint256 proposalId, uint8 support, string calldata reason)
+- castVoteWithReasonAndParams(uint256 proposalId, uint8 support, string calldata reason, bytes memory params)
+- castVoteBySig(uint256 proposalId, uint8 support, uint8 v, bytes32 r, bytes32 s)
+- castVoteWithReasonAndParamsBySig(uint256 proposalId, uint8 support, string calldata reason, bytes memory params, uint8 v, bytes32 r, bytes32 s)
 
 ERC165:
 
 - onERC721Received(address, address, uint256, bytes memory)
-- onERC1155Received(
-  address,
-  address,
-  uint256,
-  uint256,
-  bytes memory
-  )
-- onERC1155BatchReceived(
-  address,
-  address,
-  uint256[] memory,
-  uint256[] memory,
-  bytes memory
-  )
+- onERC1155Received(address, address, uint256, uint256, bytes memory)
+- onERC1155BatchReceived(address, address, uint256[] memory, uint256[] memory, bytes memory)
 
 OnlyGovernance:
 
