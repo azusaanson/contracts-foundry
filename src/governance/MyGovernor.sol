@@ -15,7 +15,7 @@ contract MyGovernor is
 {
     // ============ Constants ============
     string internal constant _NAME = "MyGovernor";
-    uint256 internal constant _QUORUM_NUMERATOR = 20;
+    uint256 internal constant _QUORUM_NUMERATOR = 10;
     uint256 internal constant _VOTING_DELAY = 7200; // 1 day
     uint256 internal constant _VOTING_PERIOD = 50400; // 1 week
 
