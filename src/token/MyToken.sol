@@ -19,6 +19,10 @@ contract MyToken is IMyToken, ERC20Votes {
     }
 
     // ============ External Functions ============
+    function initialSupply() external pure virtual override returns (uint256) {
+        return _INITIAL_SUPPLY;
+    }
+
     function burn(uint256 amount) external {
         super._burn(_msgSender(), amount);
     }
