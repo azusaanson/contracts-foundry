@@ -32,7 +32,6 @@ contract MyToken is IMyToken, ERC20Votes {
     }
 
     // ============ External Functions ============
-
     function burn(uint256 amount) external {
         super._burn(_msgSender(), amount);
     }
@@ -43,7 +42,6 @@ contract MyToken is IMyToken, ERC20Votes {
     }
 
     // ============ External Override Functions ============
-
     function delegates(
         address account
     ) public view virtual override(ERC20Votes, IVotes) returns (address) {
