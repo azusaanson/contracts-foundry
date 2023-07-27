@@ -19,6 +19,13 @@ contract MyGovernorTest is Test, Helper {
     }
 
     function testBasic() public {
+        vm.roll(myGovernor.clock() + 1);
         assertEq(myGovernor.name(), "MyGovernor");
+        assertEq(myGovernor.votingDelay(), 7200);
+        assertEq(myGovernor.votingPeriod(), 50400);
+        assertEq(
+            myGovernor.getVotes(distributor, myGovernor.clock() - 1),
+            INITIAL_SUPPLY
+        );
     }
 }
