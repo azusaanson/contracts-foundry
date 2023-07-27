@@ -18,10 +18,20 @@ contract MyToken is IMyToken, ERC20Votes {
         super._mint(distributor, _INITIAL_SUPPLY);
     }
 
-    // ============ External Functions ============
-    function initialSupply() external pure virtual override returns (uint256) {
+    // ============ External View Functions ============
+    function initialSupply() external pure returns (uint256) {
         return _INITIAL_SUPPLY;
     }
+
+    function supportsInterface(
+        bytes4 interfaceId
+    ) external pure returns (bool) {
+        return
+            interfaceId == type(IERC20).interfaceId ||
+            interfaceId == type(IVotes).interfaceId;
+    }
+
+    // ============ External Functions ============
 
     function burn(uint256 amount) external {
         super._burn(_msgSender(), amount);
@@ -32,11 +42,14 @@ contract MyToken is IMyToken, ERC20Votes {
         super._burn(account, amount);
     }
 
-    function supportsInterface(
-        bytes4 interfaceId
-    ) external pure returns (bool) {
-        return
-            interfaceId == type(IERC20).interfaceId ||
-            interfaceId == type(IVotes).interfaceId;
+    // ============ External Override Functions ============
+
+    function delegates(
+        address account
+    ) public view virtual override(ERC20Votes, IVotes) returns (address) {
+        if (super.delegates(account) == address(0)) {
+            return account;
+        }
+        return super.delegates(account);
     }
 }
