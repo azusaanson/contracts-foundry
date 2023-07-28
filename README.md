@@ -30,6 +30,14 @@ yarn add hardhat
 
 - [solidity by Juan Blanco](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
 
+### Useful Links
+
+- [foundry](https://book.getfoundry.sh/)
+- [hardhat](https://hardhat.org/hardhat-runner/docs/getting-started#overview)
+- [openzeppelin](https://docs.openzeppelin.com/contracts/4.x/)
+- [openzeppelin contracts repository](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master)
+- [openzeppelin wizard](https://wizard.openzeppelin.com/)
+
 ## Build Compile and Test
 
 - build
