@@ -1,27 +1,69 @@
 # contracts-foundry
 
-- [Compile and Test](#compile-and-test/)
-- [Vscode Extension](#vscode-extension/)
+- [Get Started](#get-started/)
+- [Build Compile and Test](#build-compile-and-test/)
+- [Deploy](#deploy/)
 - [MyToken](#mytoken/)
 - [MyGovernor](#my-governor/)
 
-## Compile and Test
+## Get Started
 
-- Compile
+### Install Dependencies
+
+- install foundry
+
+```
+curl -L https://foundry.paradigm.xyz | bash
+```
+
+```
+foundryup
+```
+
+- install hardhat
+
+```
+yarn add hardhat
+```
+
+### Vscode Extension
+
+- [solidity by Juan Blanco](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
+
+## Build Compile and Test
+
+- build
+
+```
+forge build
+```
+
+- compile
 
 ```
 forge compile
 ```
 
-- Test
+- test
 
 ```
 forge test
 ```
 
-## Vscode Extension
+## Deploy
 
-- [solidity by Juan Blanco](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
+- setup local node
+
+```
+cd hardhat
+yarn hardhat node
+```
+
+- build
+
+```
+forge build
+```
 
 ## MyToken
 
