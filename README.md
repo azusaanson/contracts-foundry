@@ -1,10 +1,10 @@
 # contracts-foundry
 
-- [Get Started](#get-started/)
-- [Build Compile and Test](#build-compile-and-test/)
-- [Deploy](#deploy/)
-- [MyToken](#mytoken/)
-- [MyGovernor](#my-governor/)
+- [Get Started](#get-started)
+- [Build Compile and Test](#build-compile-and-test)
+- [Deploy](#deploy)
+- [MyToken](#mytoken)
+- [MyGovernor](#mygovernor)
 
 ## Get Started
 
