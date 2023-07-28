@@ -52,6 +52,8 @@ forge test
 
 ## Deploy
 
+### local
+
 - setup local node
 
 ```
@@ -59,10 +61,26 @@ cd hardhat
 yarn hardhat node
 ```
 
-- build
+- build and deploy
 
 ```
 forge build
+forge create --rpc-url http://localhost:8545 \
+  --constructor-args <values> \
+  --private-key <your_private_key> \
+  <your_contract>
+
+```
+
+example:
+
+```
+forge build
+forge create --rpc-url http://localhost:8545 \
+  --constructor-args "ForgeUSD" "FUSD" 18 1000000000000000000000 \
+  --private-key <your_private_key> \
+  src/MyToken.sol:MyToken
+
 ```
 
 ## MyToken
