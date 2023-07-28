@@ -61,26 +61,20 @@ cd hardhat
 yarn hardhat node
 ```
 
+- setup .env PRIVATE_KEY
+
 - build and deploy
 
-```
-forge build
-forge create --rpc-url http://localhost:8545 \
-  --constructor-args <values> \
-  --private-key <your_private_key> \
-  <your_contract>
+MyToken
 
 ```
+make deploy_mytoken_local distributor=<distributorAddr>
+```
 
-example:
+MyGovernor
 
 ```
-forge build
-forge create --rpc-url http://localhost:8545 \
-  --constructor-args "ForgeUSD" "FUSD" 18 1000000000000000000000 \
-  --private-key <your_private_key> \
-  src/MyToken.sol:MyToken
-
+make deploy_mygovernor_local token_addr=<MyTokenContractAddr>
 ```
 
 ## MyToken
