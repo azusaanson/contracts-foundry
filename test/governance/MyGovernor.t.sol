@@ -20,11 +20,11 @@ contract MyGovernorTest is Test, Helper {
     }
 
     function testBasic() public {
-        vm.roll(myGovernor.clock() + 1);
+        vm.roll(myGovernor.clock() + 1); // add 1 block to make sure getVotes works
         assertEq(myGovernor.name(), "MyGovernor");
         assertEq(myGovernor.version(), "1");
-        assertEq(myGovernor.votingDelay(), 7200);
-        assertEq(myGovernor.votingPeriod(), 50400);
+        assertEq(myGovernor.votingDelay(), 7200); // 1 day
+        assertEq(myGovernor.votingPeriod(), 50400); // 1 week
         assertEq(
             myGovernor.getVotes(distributor, myGovernor.clock() - 1),
             INITIAL_SUPPLY
@@ -60,12 +60,12 @@ contract MyGovernorTest is Test, Helper {
         address voteAddrAgainst = makeAddr("voteAddr2");
 
         // transfer token to addrs
-        vm.roll(myGovernor.clock() + 1);
+        vm.roll(myGovernor.clock() + 1); // add 1 block to make sure getVotes works
 
         vm.startPrank(distributor);
         myToken.transfer(governorTreasury, 10_000_000);
         myToken.transfer(proposer, 1_000_000);
-        myToken.transfer(voteAddrFor, 100_000_000);
+        myToken.transfer(voteAddrFor, 100_000_000); // 10% of total supply to satisfy quorum
         assertEq(myToken.getVotes(voteAddrFor), 100_000_000);
         myToken.transfer(voteAddrAgainst, 40_000_000);
         assertEq(myToken.getVotes(voteAddrAgainst), 40_000_000);
@@ -87,7 +87,7 @@ contract MyGovernorTest is Test, Helper {
         assertEq(myGovernor.proposalProposer(proposalId), proposer);
 
         // start voting
-        vm.roll(myGovernor.clock() + 7201);
+        vm.roll(myGovernor.clock() + 7201); // add 1 additional block to make sure state is Active
         assertEq(
             uint256(myGovernor.state(proposalId)),
             uint256(IGovernor.ProposalState.Active)
@@ -105,7 +105,7 @@ contract MyGovernorTest is Test, Helper {
         vm.stopPrank();
 
         // check voting result
-        vm.roll(myGovernor.clock() + 50401);
+        vm.roll(myGovernor.clock() + 50401); // add 1 additional block to make sure state is Succeeded
         assertEq(
             uint256(myGovernor.state(proposalId)),
             uint256(IGovernor.ProposalState.Succeeded)
@@ -116,7 +116,7 @@ contract MyGovernorTest is Test, Helper {
             myTokenAddrs,
             values,
             callDatas,
-            keccak256(bytes("proposal #1 : Description"))
+            keccak256(bytes("proposal #1 : Description")) // define again to avoid "Stack too deep" error by optimizer
         );
         assertEq(
             uint256(myGovernor.state(proposalId)),
