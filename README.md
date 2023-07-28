@@ -65,17 +65,17 @@ yarn hardhat node
 
 - build and deploy
 
-MyToken
+  - MyToken
 
-```
-make deploy_mytoken_local distributor=<distributorAddr>
-```
+  ```
+  make deploy_mytoken_local distributor=<distributorAddr>
+  ```
 
-MyGovernor
+  - MyGovernor
 
-```
-make deploy_mygovernor_local token_addr=<MyTokenContractAddr>
-```
+  ```
+  make deploy_mygovernor_local token_addr=<MyTokenContractAddr>
+  ```
 
 ## MyToken
 
