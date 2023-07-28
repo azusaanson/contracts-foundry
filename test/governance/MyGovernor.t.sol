@@ -42,7 +42,7 @@ contract MyGovernorTest is Test, Helper {
         address to = makeAddr("to");
         bytes[] memory callDatas = new bytes[](1);
         callDatas[0] = abi.encodeWithSignature(
-            "transfer(address,uint)",
+            "transfer(address,uint256)",
             to,
             1_000
         );
@@ -112,7 +112,6 @@ contract MyGovernorTest is Test, Helper {
         );
 
         // execute proposal
-        /*
         vm.startPrank(proposer);
         myGovernor.execute(
             myTokenAddrs,
@@ -127,6 +126,5 @@ contract MyGovernorTest is Test, Helper {
         assertEq(myToken.balanceOf(to), 1_000);
         assertEq(myToken.balanceOf(governorTreasury), 10_000_000 - 1_000);
         vm.stopPrank();
-        */
     }
 }
