@@ -112,7 +112,6 @@ contract MyGovernorTest is Test, Helper {
         );
 
         // execute proposal
-        vm.startPrank(proposer);
         myGovernor.execute(
             myTokenAddrs,
             values,
@@ -125,6 +124,5 @@ contract MyGovernorTest is Test, Helper {
         );
         assertEq(myToken.balanceOf(to), 1_000);
         assertEq(myToken.balanceOf(governorTreasury), 10_000_000 - 1_000);
-        vm.stopPrank();
     }
 }
