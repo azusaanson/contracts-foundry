@@ -4,14 +4,21 @@ pragma solidity ^0.8.19;
 import "../../lib/forge-std/src/Test.sol";
 import "../../src/token/MyToken.sol";
 import "../utils/Helper.sol";
+import {MyGovernor} from "../../src/governance/MyGovernor.sol";
+import {IVotes} from "../../lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol";
 
 contract MyTokenTest is Test, Helper {
     MyToken public myToken;
+    MyGovernor public myGovernor;
     address public distributor = makeAddr("distributor");
     uint256 public constant INITIAL_SUPPLY = 1_000_000_000;
 
     function setUp() public {
-        myToken = new MyToken(distributor);
+        vm.startPrank(distributor);
+        myToken = new MyToken();
+        myGovernor = new MyGovernor(IVotes(address(myToken)));
+        myToken.updateGovernor(address(myGovernor));
+        vm.stopPrank();
     }
 
     function testBasic() public {
@@ -21,6 +28,7 @@ contract MyTokenTest is Test, Helper {
         assertEq(myToken.totalSupply(), INITIAL_SUPPLY);
         assertEq(myToken.balanceOf(distributor), INITIAL_SUPPLY);
         assertEq(myToken.getVotes(distributor), INITIAL_SUPPLY);
+        assertEq(myToken.governor(), address(myGovernor));
     }
 
     function testTransfer(uint256 amount, uint256 amount2) public {
@@ -87,38 +95,56 @@ contract MyTokenTest is Test, Helper {
     }
 
     function testBurn(
-        uint256 amount,
-        uint256 burnAmount1,
+        uint256 governorAmount,
+        uint256 burnFromAmount,
+        uint256 burnAmount,
         uint256 allowAmount,
-        uint256 burnAmount2
+        uint256 burnBurnFromAmount
     ) public {
-        address addr1 = makeAddr("addr1");
-        address addr2 = makeAddr("addr2");
+        address governor = address(myGovernor);
+        address burnFromAddr = makeAddr("addr");
 
+        // init balance
         vm.startPrank(distributor);
-        amount = _zeroMod(amount, INITIAL_SUPPLY);
-        myToken.transfer(addr1, amount);
+        governorAmount = _zeroMod(governorAmount, INITIAL_SUPPLY);
+        burnFromAmount = _zeroMod(
+            burnFromAmount,
+            INITIAL_SUPPLY - governorAmount
+        );
+        myToken.transfer(governor, governorAmount);
+        myToken.transfer(burnFromAddr, burnFromAmount);
         vm.stopPrank();
 
-        vm.startPrank(addr1);
-        burnAmount1 = _zeroMod(burnAmount1, amount);
-        myToken.burn(burnAmount1);
-        assertEq(myToken.totalSupply(), INITIAL_SUPPLY - burnAmount1);
-        assertEq(myToken.balanceOf(addr1), amount - burnAmount1);
-        assertEq(myToken.getVotes(addr1), amount - burnAmount1);
-        allowAmount = _zeroMod(allowAmount, myToken.balanceOf(addr1));
-        myToken.approve(addr2, allowAmount);
+        // test burn
+        vm.startPrank(governor);
+        burnAmount = _zeroMod(burnAmount, governorAmount);
+        myToken.burn(burnAmount);
+        assertEq(myToken.totalSupply(), INITIAL_SUPPLY - burnAmount);
+        assertEq(myToken.balanceOf(governor), governorAmount - burnAmount);
+        assertEq(myToken.getVotes(governor), governorAmount - burnAmount);
         vm.stopPrank();
 
-        vm.startPrank(addr2);
-        burnAmount2 = _zeroMod(burnAmount2, allowAmount);
-        myToken.burnFrom(addr1, burnAmount2);
+        // test burnFrom
+        vm.startPrank(burnFromAddr);
+        allowAmount = _zeroMod(allowAmount, myToken.balanceOf(burnFromAddr));
+        myToken.approve(governor, allowAmount);
+        vm.stopPrank();
+
+        vm.startPrank(governor);
+        burnBurnFromAmount = _zeroMod(burnBurnFromAmount, allowAmount);
+        myToken.burnFrom(burnFromAddr, burnBurnFromAmount);
         assertEq(
             myToken.totalSupply(),
-            INITIAL_SUPPLY - burnAmount1 - burnAmount2
+            INITIAL_SUPPLY - burnAmount - burnBurnFromAmount
         );
-        assertEq(myToken.balanceOf(addr1), amount - burnAmount1 - burnAmount2);
-        assertEq(myToken.getVotes(addr1), amount - burnAmount1 - burnAmount2);
+        assertEq(
+            myToken.balanceOf(burnFromAddr),
+            burnFromAmount - burnBurnFromAmount
+        );
+        assertEq(
+            myToken.getVotes(burnFromAddr),
+            burnFromAmount - burnBurnFromAmount
+        );
         vm.stopPrank();
     }
 }

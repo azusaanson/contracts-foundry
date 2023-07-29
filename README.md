@@ -136,11 +136,6 @@ ERC20:
 - increaseAllowance(address spender, uint256 addedValue)
 - decreaseAllowance(address spender, uint256 subtractedValue)
 
-Burn:
-
-- burn(uint256 amount)
-- burnFrom(address account, uint256 amount)
-
 Permit:
 
 - permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
@@ -149,6 +144,13 @@ Votes:
 
 - delegate(address delegatee)
 - delegateBySig(address delegatee, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)
+
+OnlyGovernance:
+
+- updateGovernor(address newGovernor)
+- mint(uint256 amount)
+- burn(uint256 amount)
+- burnFrom(address account, uint256 amount)
 
 ## MyGovernor
 

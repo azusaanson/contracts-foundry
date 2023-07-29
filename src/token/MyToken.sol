@@ -13,14 +13,28 @@ contract MyToken is IMyToken, ERC20Votes {
     string internal constant _SYMBOL = "MTK";
     uint256 internal constant _INITIAL_SUPPLY = 1_000_000_000;
 
+    // ============ Storages ============
+    address private _governor;
+
     // ============ Constructor ============
-    constructor(address distributor) ERC20(_NAME, _SYMBOL) ERC20Permit(_NAME) {
-        super._mint(distributor, _INITIAL_SUPPLY);
+    constructor() ERC20(_NAME, _SYMBOL) ERC20Permit(_NAME) {
+        super._mint(_msgSender(), _INITIAL_SUPPLY);
+        _governor = _msgSender();
+    }
+
+    // ============ Modifiers ============
+    modifier onlyGovernance() {
+        require(_msgSender() == _governor, "MyToken: onlyGovernance");
+        _;
     }
 
     // ============ External View Functions ============
     function initialSupply() external pure returns (uint256) {
         return _INITIAL_SUPPLY;
+    }
+
+    function governor() external view returns (address) {
+        return _governor;
     }
 
     function supportsInterface(
@@ -31,12 +45,20 @@ contract MyToken is IMyToken, ERC20Votes {
             interfaceId == type(IVotes).interfaceId;
     }
 
-    // ============ External Functions ============
-    function burn(uint256 amount) external {
+    // ============ External Only Governance Functions ============
+    function updateGovernor(address newGovernor) external onlyGovernance {
+        _governor = newGovernor;
+    }
+
+    function mint(uint256 amount) external onlyGovernance {
+        super._mint(_msgSender(), amount);
+    }
+
+    function burn(uint256 amount) external onlyGovernance {
         super._burn(_msgSender(), amount);
     }
 
-    function burnFrom(address account, uint256 amount) external {
+    function burnFrom(address account, uint256 amount) external onlyGovernance {
         super._spendAllowance(account, _msgSender(), amount);
         super._burn(account, amount);
     }

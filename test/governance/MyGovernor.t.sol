@@ -15,8 +15,11 @@ contract MyGovernorTest is Test, Helper {
     uint256 public constant INITIAL_SUPPLY = 1_000_000_000;
 
     function setUp() public {
-        myToken = new MyToken(distributor);
+        vm.startPrank(distributor);
+        myToken = new MyToken();
         myGovernor = new MyGovernor(IVotes(address(myToken)));
+        myToken.updateGovernor(address(myGovernor));
+        vm.stopPrank();
     }
 
     function testBasic() public {
