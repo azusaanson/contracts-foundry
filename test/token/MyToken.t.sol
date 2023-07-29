@@ -124,14 +124,20 @@ contract MyTokenTest is Test, Helper {
         assertEq(myToken.getVotes(governor), governorAmount - burnAmount);
         vm.stopPrank();
 
-        // test burnFrom
-        vm.startPrank(burnFromAddr);
+        // init for negative burn test and burnFrom test
         allowAmount = _zeroMod(allowAmount, myToken.balanceOf(burnFromAddr));
+        burnBurnFromAmount = _zeroMod(burnBurnFromAmount, allowAmount);
+
+        // negative burn test
+        vm.startPrank(burnFromAddr);
+        vm.expectRevert(bytes("MyToken: onlyGovernance"));
+        myToken.burn(burnBurnFromAmount);
+
+        // test burnFrom
         myToken.approve(governor, allowAmount);
         vm.stopPrank();
 
         vm.startPrank(governor);
-        burnBurnFromAmount = _zeroMod(burnBurnFromAmount, allowAmount);
         myToken.burnFrom(burnFromAddr, burnBurnFromAmount);
         assertEq(
             myToken.totalSupply(),
