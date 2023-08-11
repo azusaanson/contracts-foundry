@@ -11,8 +11,7 @@ contract MyTokenTest is Test, Helper {
     MyToken public myToken;
     MyGovernor public myGovernor;
     address public distributor = makeAddr("distributor");
-    uint256 public constant INITIAL_SUPPLY =
-        1_000_000_000_000_000_000_000_000_000;
+    uint256 public constant INITIAL_SUPPLY = 1_000_000_000;
 
     function setUp() public {
         vm.startPrank(distributor);
@@ -25,7 +24,7 @@ contract MyTokenTest is Test, Helper {
     function testBasic() public {
         assertEq(myToken.name(), "MyToken");
         assertEq(myToken.symbol(), "MTK");
-        assertEq(myToken.decimals(), 18);
+        assertEq(myToken.decimals(), 0);
         assertEq(myToken.totalSupply(), INITIAL_SUPPLY);
         assertEq(myToken.balanceOf(distributor), INITIAL_SUPPLY);
         assertEq(myToken.getVotes(distributor), INITIAL_SUPPLY);
