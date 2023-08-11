@@ -69,14 +69,14 @@ cd hardhat
 yarn hardhat node
 ```
 
-- setup .env PRIVATE_KEY
+- (optional) setup .env PRIVATE_KEY
 
 - build and deploy
 
   - MyToken
 
   ```
-  make deploy_mytoken_local distributor=<distributorAddr>
+  make deploy_mytoken_local
   ```
 
   - MyGovernor
