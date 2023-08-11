@@ -9,7 +9,7 @@ deploy_mytoken_local:
 deploy_mygovernor_local:
 	forge build
 	forge create --rpc-url ${LOCAL_RPC_URL} \
-		--constructor-args ${token_addr} \
+		--constructor-args ${LOCAL_TOKEN_ADDR} \
 		--private-key ${LOCAL_PRIVATE_KEY} \
 		src/governance/MyGovernor.sol:MyGovernor
 
