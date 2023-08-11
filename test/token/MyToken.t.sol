@@ -11,7 +11,8 @@ contract MyTokenTest is Test, Helper {
     MyToken public myToken;
     MyGovernor public myGovernor;
     address public distributor = makeAddr("distributor");
-    uint256 public constant INITIAL_SUPPLY = 1_000_000_000;
+    uint256 public constant INITIAL_SUPPLY =
+        1_000_000_000_000_000_000_000_000_000;
 
     function setUp() public {
         vm.startPrank(distributor);

@@ -12,7 +12,8 @@ contract MyGovernorTest is Test, Helper {
     MyGovernor public myGovernor;
     MyToken public myToken;
     address public distributor = makeAddr("distributor");
-    uint256 public constant INITIAL_SUPPLY = 1_000_000_000;
+    uint256 public constant INITIAL_SUPPLY =
+        1_000_000_000_000_000_000_000_000_000;
 
     function setUp() public {
         vm.startPrank(distributor);
@@ -68,8 +69,8 @@ contract MyGovernorTest is Test, Helper {
         vm.startPrank(distributor);
         myToken.transfer(governorTreasury, 10_000_000);
         myToken.transfer(proposer, 1_000_000);
-        myToken.transfer(voteAddrFor, 100_000_000); // 10% of total supply to satisfy quorum
-        assertEq(myToken.getVotes(voteAddrFor), 100_000_000);
+        myToken.transfer(voteAddrFor, INITIAL_SUPPLY / 10); // 10% of total supply to satisfy quorum
+        assertEq(myToken.getVotes(voteAddrFor), INITIAL_SUPPLY / 10);
         myToken.transfer(voteAddrAgainst, 40_000_000);
         assertEq(myToken.getVotes(voteAddrAgainst), 40_000_000);
         vm.stopPrank();
