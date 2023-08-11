@@ -2,6 +2,7 @@
 
 - [Get Started](#get-started)
 - [Build Compile and Test](#build-compile-and-test)
+- [Generate ABIs](#generate-abis)
 - [Deploy](#deploy)
 - [MyToken](#mytoken)
 - [MyGovernor](#mygovernor)
@@ -56,6 +57,12 @@ forge compile
 
 ```
 forge test
+```
+
+## Generate ABIs
+
+```
+make gen_abi
 ```
 
 ## Deploy

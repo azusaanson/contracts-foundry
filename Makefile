@@ -13,4 +13,8 @@ deploy_mygovernor_local:
 		--private-key ${LOCAL_PRIVATE_KEY} \
 		src/governance/MyGovernor.sol:MyGovernor
 
-.PHONY: deploy_local
+gen_abi:
+	solc --abi src/token/MyToken.sol -o abi/MyToken
+	solc --abi src/governance/MyGovernor.sol -o abi/MyGovernor
+
+.PHONY: deploy_mytoken_local deploy_mygovernor_local gen_abi
