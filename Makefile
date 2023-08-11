@@ -14,7 +14,7 @@ deploy_mygovernor_local:
 		src/governance/MyGovernor.sol:MyGovernor
 
 gen_abi:
-	solc --abi src/token/MyToken.sol -o abi/MyToken
-	solc --abi src/governance/MyGovernor.sol -o abi/MyGovernor
+	solc --abi src/token/MyToken.sol -o abi/MyToken --overwrite
+	solc --abi src/governance/MyGovernor.sol -o abi/MyGovernor --overwrite
 
 .PHONY: deploy_mytoken_local deploy_mygovernor_local gen_abi
