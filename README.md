@@ -21,12 +21,6 @@ curl -L https://foundry.paradigm.xyz | bash
 foundryup
 ```
 
-- install hardhat
-
-```
-yarn add hardhat
-```
-
 ### Vscode Extension
 
 - [solidity by Juan Blanco](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
@@ -34,7 +28,6 @@ yarn add hardhat
 ### Useful Links
 
 - [foundry](https://book.getfoundry.sh/)
-- [hardhat](https://hardhat.org/hardhat-runner/docs/getting-started#overview)
 - [openzeppelin](https://docs.openzeppelin.com/contracts/4.x/)
 - [openzeppelin contracts repository](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master)
 - [openzeppelin wizard](https://wizard.openzeppelin.com/)
@@ -72,11 +65,10 @@ make gen_abi
 - setup local node
 
 ```
-cd hardhat
-yarn hardhat node
+anvil
 ```
 
-- (optional) setup .env PRIVATE_KEY
+- (optional) setup .env LOCAL_PRIVATE_KEY, LOCAL_TOKEN_ADDR and LOCAL_GOVERNOR_ADDR
 
 - build and deploy
 
