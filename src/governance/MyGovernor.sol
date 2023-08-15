@@ -29,6 +29,26 @@ contract MyGovernor is
     {}
 
     // ============ External Functions ============
+    function proposalDetail(
+        uint256 proposalId
+    )
+        external
+        view
+        returns (
+            ProposalState state,
+            uint256 snapshot,
+            uint256 deadline,
+            address proposer
+        )
+    {
+        return (
+            super.state(proposalId),
+            super.proposalSnapshot(proposalId),
+            super.proposalDeadline(proposalId),
+            super.proposalProposer(proposalId)
+        );
+    }
+
     function votingDelay() public pure override returns (uint256) {
         return _VOTING_DELAY;
     }

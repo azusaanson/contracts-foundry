@@ -169,6 +169,7 @@ Proposal:
 - hashProposal(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
 - state(uint256 proposalId)
 - proposalThreshold() = 0
+- proposalDetail(uint256 proposalId) = (state, snapshot, deadline, proposer)
 - proposalSnapshot(uint256 proposalId)
 - proposalDeadline(uint256 proposalId)
 - proposalProposer(uint256 proposalId)
@@ -182,7 +183,7 @@ Counting:
 
 - COUNTING_MODE()
 - hasVoted(uint256 proposalId, address account)
-- proposalVotes(uint256 proposalId)
+- proposalVotes(uint256 proposalId) = (againstVotes, forVotes, abstainVotes)
 
 Quorum:
 
