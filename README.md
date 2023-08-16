@@ -81,7 +81,7 @@ anvil
   - MyGovernor
 
   ```
-  make deploy_mygovernor_local token_addr=<MyTokenContractAddr>
+  make deploy_mygovernor_local
   ```
 
 ## MyToken
