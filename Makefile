@@ -3,6 +3,7 @@ include app.env
 deploy_mytoken_local:
 	forge build
 	forge create --rpc-url ${LOCAL_RPC_URL} \
+		--constructor-args ${LOCAL_GOVERNOR_ADDR} \
 		--private-key ${LOCAL_PRIVATE_KEY} \
 		src/token/MyToken.sol:MyToken
 

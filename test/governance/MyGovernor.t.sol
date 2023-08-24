@@ -16,7 +16,7 @@ contract MyGovernorTest is Test, Helper {
 
     function setUp() public {
         vm.startPrank(distributor);
-        myToken = new MyToken();
+        myToken = new MyToken(distributor);
         myGovernor = new MyGovernor(IVotes(address(myToken)));
         myToken.updateGovernor(address(myGovernor));
         vm.stopPrank();

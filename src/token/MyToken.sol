@@ -17,9 +17,11 @@ contract MyToken is IMyToken, ERC20Votes {
     address private _governor;
 
     // ============ Constructor ============
-    constructor() ERC20(_NAME, _SYMBOL) ERC20Permit(_NAME) {
+    constructor(
+        address governorAddress
+    ) ERC20(_NAME, _SYMBOL) ERC20Permit(_NAME) {
         super._mint(_msgSender(), _INITIAL_SUPPLY);
-        _governor = _msgSender();
+        _governor = governorAddress;
     }
 
     // ============ Modifiers ============
