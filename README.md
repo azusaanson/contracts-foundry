@@ -84,6 +84,12 @@ anvil
   make deploy_mygovernor_local
   ```
 
+- mine 7200 blocks (one day) in anvil node
+
+```
+make anvil_mine_blocks_one_day
+```
+
 ## MyToken
 
 ### View
