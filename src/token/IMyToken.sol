@@ -6,8 +6,6 @@ import {IERC165} from "../../lib/openzeppelin-contracts/contracts/utils/introspe
 import {IVotes} from "../../lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol";
 
 interface IMyToken is IERC20, IERC165, IVotes {
-    function initialSupply() external pure returns (uint256);
-
     function updateGovernor(address newGovernor) external;
 
     function mint(uint256 amount) external;

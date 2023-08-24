@@ -29,10 +29,6 @@ contract MyToken is IMyToken, ERC20Votes {
     }
 
     // ============ External View Functions ============
-    function initialSupply() external pure returns (uint256) {
-        return _INITIAL_SUPPLY;
-    }
-
     function governor() external view returns (address) {
         return _governor;
     }

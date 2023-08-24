@@ -56,4 +56,8 @@ contract MyGovernor is
     function votingPeriod() public pure override returns (uint256) {
         return _VOTING_PERIOD;
     }
+
+    function proposalThreshold() public pure override returns (uint256) {
+        return 1_000;
+    }
 }

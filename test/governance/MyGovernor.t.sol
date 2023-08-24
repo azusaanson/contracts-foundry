@@ -67,12 +67,15 @@ contract MyGovernorTest is Test, Helper {
 
         vm.startPrank(distributor);
         myToken.transfer(governorTreasury, 10_000_000);
-        myToken.transfer(proposer, 1_000_000);
+        myToken.transfer(proposer, 1_000);
+        assertEq(myToken.getVotes(proposer), 1_000);
         myToken.transfer(voteAddrFor, INITIAL_SUPPLY / 10); // 10% of total supply to satisfy quorum
         assertEq(myToken.getVotes(voteAddrFor), INITIAL_SUPPLY / 10);
         myToken.transfer(voteAddrAgainst, 40_000_000);
         assertEq(myToken.getVotes(voteAddrAgainst), 40_000_000);
         vm.stopPrank();
+
+        vm.roll(myGovernor.clock() + 1); // add 1 block to make sure proposer votes over proposal threshold
 
         // create proposal
         vm.startPrank(proposer);
