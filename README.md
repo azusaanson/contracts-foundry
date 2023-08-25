@@ -84,17 +84,25 @@ anvil
   make deploy_mygovernor_local
   ```
 
-- mine one block in anvil node
+- cheating in anvil
 
-```
-make anvil_mine_block
-```
+  - mine one block in anvil node
 
-- mine 7200 blocks (one day) in anvil node
+  ```
+  make anvil_mine_block
+  ```
 
-```
-make anvil_mine_blocks_one_day
-```
+  - mine 7200 blocks (one day) in anvil node
+
+  ```
+  make anvil_mine_blocks_one_day
+  ```
+
+  - mine 50400 blocks (one week) in anvil node (a long wait, use carefully)
+
+  ```
+  make anvil_mine_blocks_one_week
+  ```
 
 ## MyToken
 
@@ -104,7 +112,7 @@ ERC20:
 
 - name() = MyToken
 - symbol() = MYTOKEN
-- decimals() = 18
+- decimals() = 0
 - totalSupply()
 - balanceOf(address account)
 - allowance(address owner, address spender)
@@ -132,10 +140,6 @@ Votes:
 - getVotes(address account)
 - getPastVotes(address account, uint256 timepoint)
 - getPastTotalSupply(uint256 timepoint)
-
-Other:
-
-- initialSupply() = 1_000_000_000
 
 ### Post
 
@@ -180,7 +184,7 @@ Proposal:
 
 - hashProposal(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
 - state(uint256 proposalId)
-- proposalThreshold() = 0
+- proposalThreshold() = 1000
 - proposalDetail(uint256 proposalId) = (state, snapshot, deadline, proposer)
 - proposalSnapshot(uint256 proposalId)
 - proposalDeadline(uint256 proposalId)
